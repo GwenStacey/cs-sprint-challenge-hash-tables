@@ -4,9 +4,30 @@
 
 def finder(files, queries):
     """
-    YOUR CODE HERE
+    Given a list of file paths files
+    return file paths containing files in 
+    list queries
     """
-    # Your code here
+    paths_to_files = {}
+    result = []
+    for i in files:
+        split_text = i.rpartition('/')
+        key = split_text[0]+split_text[1]
+        value = split_text[2]
+        if key not in paths_to_files:
+            paths_to_files[key] = [value]
+        else:
+            paths_to_files[key].append(value)
+    
+    for i in queries:
+        for j in paths_to_files.keys():
+            if i in paths_to_files[j]:
+                if paths_to_files[j][0] == i:
+                    result.append(j + paths_to_files[j][0])
+                elif paths_to_files[j][1] == i:
+                    result.append(j + paths_to_files[j][1])
+            
+                
 
     return result
 
